@@ -53,32 +53,28 @@ ioServer.io.on("error", (error) => {
 });
 
 // Poging om opnieuw te verbinden
-ioServer.io.on("reconnect_attempt", (attempt) => {
+ioServer.on("reconnect_attempt", (attempt) => {
   console.log("attempting reconnection");
 });
 
 // Verbinding geslaagd
-ioServer.io.on("reconnect", (attempt) => {
+ioServer.on("reconnect", (attempt) => {
   loadingState.style.display = "none";
   emptyState.style.display = "none";
   errorState.style.display = "none";
 });
 
-// De server stuurt doorlopend pings om te kijken of de boel online is
-ioServer.io.on("ping", () => {
-  // ...
-});
-
 // Als het reconnecten niet goed gaat
-ioServer.io.on("reconnect_error", (error) => {
-  // ...
+ioServer.on("reconnect_error", (error) => {
+  // Handle reconnect error here
 });
 
 // Reconnecten is een aantal keer (reconnectionAttempts) geprobeerd en faalt
 // het reconnecten stopt, misschien handig voor een 'probeer opnieuw' knop.
-ioServer.io.on("reconnect_failed", () => {
-  // ...
+ioServer.on("reconnect_failed", () => {
+  // Handle reconnect failure here
 });
+
 
 /**
  * Impure function that appends a new li item holding the passed message to the
