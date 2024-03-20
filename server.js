@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
 ioServer.on('connection', (client) => {
   console.log(`user ${client.id} connected`);
   client.emit('history', history);
+  client.emit('message', "Welcome");
 
   client.on('message', (message) => {
     while (history.length > historySize) {
@@ -40,6 +41,14 @@ ioServer.on('connection', (client) => {
   client.on('disconnect', () => {
     console.log(`user ${client.id} disconnected`);
   });
+
+  //Broadcast.emit()
+  client.broadcast.emit('message', 'A user has joined the chat');
+
+  //on disconnect
+  client.on('disconnect', () => {
+    ioServer.emit('message', 'A user has left the chat')
+  })
 });
 
 // Start the http server
