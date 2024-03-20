@@ -1,29 +1,32 @@
 {
-  "name": "barebonechat",
+  "name": "socket-io-game",
   "version": "1.0.0",
-  "description": "It's a barebone chat app used as an example in a course on realtime web apps.",
-  "type": "module",
+  "description": "It's just a game",
+  "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ju5tu5/barebonechat.git"
+    "url": "git+https://github.com/InjuMichorius/socket-io-game.git"
   },
   "keywords": [
     "express",
     "socket.io"
   ],
-  "author": "Justus Sturkenboom <justus@ju5tu5.nl>",
-  "license": "GPL-3.0",
+  "author": "Inju Michorius",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ju5tu5/barebonechat/issues"
+    "url": "https://github.com/InjuMichorius/socket-io-game/issues"
   },
-  "homepage": "https://github.com/ju5tu5/barebonechat#readme",
+  "homepage": "https://github.com/InjuMichorius/socket-io-game",
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
