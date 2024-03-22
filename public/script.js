@@ -7,6 +7,38 @@ const loadingState = document.querySelector("span.loading");
 const emptyState = document.querySelector("span.empty");
 const errorState = document.querySelector("span.offline");
 
+const roomName = document.getElementById('room-name');
+const userList = document.getElementById('users');
+
+// Get username and room from URL
+const params = new URLSearchParams(window.location.search);
+const username = params.get('username');
+const room = params.get('room');
+
+// Join chatroom
+ioServer.emit('joinRoom', { username, room });
+
+// Get room and users
+ioServer.on('roomUsers', ({ room, users }) => {
+  outputRoomName(room);
+  outputUsers(users);
+});
+
+// Add room name to DOM
+function outputRoomName(room) {
+  roomName.innerText = room;
+}
+
+// Add users to DOM
+function outputUsers(users) {
+  userList.innerHTML = '';
+  users.forEach((user) => {
+    const li = document.createElement('li');
+    li.innerText = user.username;
+    userList.appendChild(li);
+  });
+}
+
 // Luister naar het submit event
 document.querySelector("form").addEventListener("submit", (event) => {
   event.preventDefault();
@@ -18,23 +50,6 @@ document.querySelector("form").addEventListener("submit", (event) => {
 
     // Leeg het form field
     input.value = "";
-  }
-});
-
-// Luister naar de historie van de chat
-ioServer.on("history", (history) => {
-  // Als er geen historie is tonen we de empty state
-  if (history.length === 0) {
-    loadingState.style.display = "none";
-    emptyState.style.display = "inline";
-
-    // Er zijn berichten, haal de states weg en loop ze op het scherm
-  } else {
-    loadingState.style.display = "none";
-    emptyState.style.display = "none";
-    history.forEach((message) => {
-      addMessage(message);
-    });
   }
 });
 
@@ -75,15 +90,13 @@ ioServer.on("reconnect_failed", () => {
   // Handle reconnect failure here
 });
 
-
-/**
- * Impure function that appends a new li item holding the passed message to the
- * global messages object and then scrolls the list to the last message.
- * @param {*} message the message to append
- */
 function addMessage(message) {
-  messages.appendChild(
-    Object.assign(document.createElement("li"), { textContent: message })
-  );
+  // messages.appendChild(
+  //   Object.assign(document.createElement("li"), { textContent: message })
+  // );
+  const messageElement = document.createElement('li');
+  messageElement.classList.add('message-container');
+  messageElement.innerHTML = `<p><b>${message.username}: </b>${message.text}<p><span class="time">${message.time}</span>`;
+  messages.appendChild(messageElement);
   messages.scrollTop = messages.scrollHeight;
 }

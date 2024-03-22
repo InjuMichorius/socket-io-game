@@ -100,7 +100,6 @@ section ul {
   overflow-y: scroll;
   font-family: "Kanit", sans-serif;
   font-size: 24px;
-  font-weight: 700;
   font-style: normal;
   color: var(--yellow-dark);
 }
@@ -109,9 +108,16 @@ section ul {
   background: transparent;
 }
 
-section ul > li {
+section ul > .message-container {
   padding: 0.2rem 10px;
   font-size: 1rem;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+section ul > .message-container p {
+  margin: 0;
 }
 
 section form {
