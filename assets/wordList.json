@@ -1,38 +1,298 @@
 [
   {
-    "word": "word1",
-    "hint": "hint"
+    "word": "Smile",
+    "hint": "Something that brightens your face and spreads happiness"
   },
   {
-    "word": "word2",
-    "hint": "hint"
+    "word": "Bacon",
+    "hint": "Oink oink.."
   },
   {
-    "word": "word3",
-    "hint": "hint"
+    "word": "Heart",
+    "hint": "Symbol of love and affection"
   },
   {
-    "word": "word4",
-    "hint": "hint"
+    "word": "Apple",
+    "hint": "A fruit a day keeps the doctor away"
   },
   {
-    "word": "word5",
-    "hint": "hint"
+    "word": "Music",
+    "hint": "Brings rhythm and harmony to life"
   },
   {
-    "word": "word6",
-    "hint": "hint"
+    "word": "Laugh",
+    "hint": "The sound of joy and amusement"
   },
   {
-    "word": "word7",
-    "hint": "hint"
+    "word": "Beach",
+    "hint": "Sandy shores and ocean waves"
   },
   {
-    "word": "word8",
-    "hint": "hint"
+    "word": "Pizza",
+    "hint": "Cheesy, delicious, and irresistible"
   },
   {
-    "word": "word9",
-    "hint": "hint"
+    "word": "Stars",
+    "hint": "Twinkling lights in the night sky"
+  },
+  {
+    "word": "Books",
+    "hint": "Portals to countless adventures"
+  },
+  {
+    "word": "Dream",
+    "hint": "Imaginative journeys of the mind"
+  },
+  {
+    "word": "Rainy",
+    "hint": "Pitter-patter on the windowpane"
+  },
+  {
+    "word": "Cloud",
+    "hint": "Fluffy formations in the sky"
+  },
+  {
+    "word": "Candy",
+    "hint": "Sweet treats for the sweet tooth"
+  },
+  {
+    "word": "Happy",
+    "hint": "Joyful and content with life"
+  },
+  {
+    "word": "Fairy",
+    "hint": "Magical beings of folklore"
+  },
+  {
+    "word": "Robot",
+    "hint": "Mechanical marvels of technology"
+  },
+  {
+    "word": "Sunny",
+    "hint": "Bright and shining weather"
+  },
+  {
+    "word": "Peace",
+    "hint": "Harmony and tranquility"
+  },
+  {
+    "word": "Queen",
+    "hint": "Ruler of a kingdom"
+  },
+  {
+    "word": "Magic",
+    "hint": "Mystical forces beyond comprehension"
+  },
+  {
+    "word": "Space",
+    "hint": "Vast expanse beyond our world"
+  },
+  {
+    "word": "Coffee",
+    "hint": "Aromatic beverage to start the day"
+  },
+  {
+    "word": "Ocean",
+    "hint": "Endless blue horizon"
+  },
+  {
+    "word": "Child",
+    "hint": "Innocent and playful young one"
+  },
+  {
+    "word": "Storm",
+    "hint": "Powerful atmospheric disturbance"
+  },
+  {
+    "word": "Angel",
+    "hint": "Divine messenger with wings"
+  },
+  {
+    "word": "Socks",
+    "hint": "Keeps your feet warm in winter"
+  },
+  {
+    "word": "Salsa",
+    "hint": "Spicy dance and delicious dip"
+  },
+  {
+    "word": "Train",
+    "hint": "Chugs along on tracks"
+  },
+  {
+    "word": "Dream",
+    "hint": "Wishful state during sleep"
+  },
+  {
+    "word": "Honey",
+    "hint": "Sweet nectar from bees"
+  },
+  {
+    "word": "Paint",
+    "hint": "Colors the world with creativity"
+  },
+  {
+    "word": "Angel",
+    "hint": "Heavenly messenger with wings"
+  },
+  {
+    "word": "Pearl",
+    "hint": "Precious gem from the sea"
+  },
+  {
+    "word": "Toast",
+    "hint": "Bread warmed until golden brown"
+  },
+  {
+    "word": "Whale",
+    "hint": "Giant mammal of the ocean"
+  },
+  {
+    "word": "Clock",
+    "hint": "Tells time with hands and numbers"
+  },
+  {
+    "word": "Flame",
+    "hint": "Burning fire or passion"
+  },
+  {
+    "word": "Cloud",
+    "hint": "Fluffy mass in the sky"
+  },
+  {
+    "word": "Plant",
+    "hint": "Green living organism"
+  },
+  {
+    "word": "Pearl",
+    "hint": "Smooth, round jewel from oysters"
+  },
+  {
+    "word": "Tiger",
+    "hint": "Striped and fierce feline"
+  },
+  {
+    "word": "Fruit",
+    "hint": "Natural, juicy snack"
+  },
+  {
+    "word": "Moon",
+    "hint": "Earth's natural satellite"
+  },
+  {
+    "word": "Cake",
+    "hint": "Sweet dessert for celebrations"
+  },
+  {
+    "word": "Keys",
+    "hint": "Unlocks doors and starts engines"
+  },
+  {
+    "word": "Rose",
+    "hint": "Beautiful flower with thorns"
+  },
+  {
+    "word": "Gold",
+    "hint": "Precious metal of great value"
+  },
+  {
+    "word": "Fire",
+    "hint": "Produces heat and light"
+  },
+  {
+    "word": "Leaf",
+    "hint": "Flat, green part of a plant"
+  },
+  {
+    "word": "Star",
+    "hint": "Luminous celestial body"
+  },
+  {
+    "word": "Bird",
+    "hint": "Feathered creature that flies"
+  },
+  {
+    "word": "Cake",
+    "hint": "Sweet dessert often served at birthdays"
+  },
+  {
+    "word": "Wind",
+    "hint": "Moving air that can be felt"
+  },
+  {
+    "word": "Rose",
+    "hint": "Symbol of love and romance"
+  },
+  {
+    "word": "Fish",
+    "hint": "Swims in rivers, lakes, and oceans"
+  },
+  {
+    "word": "Snow",
+    "hint": "Frozen precipitation from the sky"
+  },
+  {
+    "word": "Time",
+    "hint": "Measurement of past, present, and future"
+  },
+  {
+    "word": "Door",
+    "hint": "Opens to allow entry or exit"
+  },
+  {
+    "word": "Road",
+    "hint": "Pathway for vehicles and pedestrians"
+  },
+  {
+    "word": "Star",
+    "hint": "Celestial body that shines in the night sky"
+  },
+  {
+    "word": "Wind",
+    "hint": "Moving air currents"
+  },
+  {
+    "word": "Moon",
+    "hint": "Earth's natural satellite that orbits around it"
+  },
+  {
+    "word": "Cake",
+    "hint": "Delicious dessert often enjoyed at parties"
+  },
+  {
+    "word": "Keys",
+    "hint": "Unlock doors and start engines"
+  },
+  {
+    "word": "Fish",
+    "hint": "Aquatic creature with fins and scales"
+  },
+  {
+    "word": "Rose",
+    "hint": "Beautiful flower with thorns and petals"
+  },
+  {
+    "word": "Star",
+    "hint": "Glowing celestial body in the sky"
+  },
+  {
+    "word": "Time",
+    "hint": "Measurement of the past, present, and future"
+  },
+  {
+    "word": "Door",
+    "hint": "Entrance or exit barrier"
+  },
+  {
+    "word": "Road",
+    "hint": "Path for vehicles and pedestrians"
+  },
+  {
+    "word": "Fish",
+    "hint": "Swims in water and has fins"
+  },
+  {
+    "word": "Rose",
+    "hint": "Flower often given as a symbol of love"
   }
 ]

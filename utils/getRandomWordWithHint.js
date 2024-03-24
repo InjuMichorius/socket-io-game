@@ -4,7 +4,9 @@ const wordsData = require('../assets/wordList.json');
 function getRandomWordWithHint() {
   const randomIndex = Math.floor(Math.random() * wordsData.length);
   const randomWordObject = wordsData[randomIndex];
-  return { randomWord: randomWordObject.word, randomHint: randomWordObject.hint };
+  const randomWord = randomWordObject.word.toLowerCase(); // Convert the word to lowercase
+  const randomHint = randomWordObject.hint;
+  return { randomWord, randomHint };
 }
 
 module.exports = { getRandomWordWithHint };

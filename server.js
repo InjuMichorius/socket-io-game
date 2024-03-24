@@ -3,8 +3,8 @@ const { Server } = require('socket.io');
 const { createServer } = require('http');
 const express = require('express');
 
-const { getRandomWordWithHint } = require('./utils/getRandomWord');
-const { randomWord, randomHint } = getRandomWordWithHint();
+const { shuffleWord } = require('./utils/shuffleWord');
+const { getRandomWordWithHint } = require('./utils/getRandomWordWithHint');
 
 const formatMessage = require('./utils/formatMessage')
 const {
@@ -23,7 +23,31 @@ const ioServer = new Server(http, {
   },
 });
 const port = process.env.PORT || 4242;
-const botName = "Scramble master"
+const botName = "Scramble master";
+let refreshInterval
+let randomWord
+// Map to store room states (whether a game is in progress)
+const roomStates = new Map();
+
+// Function to start the game for a room
+function startGame(room) {
+  roomStates.set(room, true); // Set room state to indicate game in progress
+  const emitRandomWord = () => {
+    const { randomWord: newRandomWord, randomHint } = getRandomWordWithHint();
+    randomWord = newRandomWord; // Update the value of randomWord
+    let shuffledWord = shuffleWord(randomWord);
+    ioServer.to(room).emit("randomWord", shuffledWord);
+  };
+
+  // Refresh the random word every 5 seconds
+  refreshInterval = setInterval(emitRandomWord, 5000);
+
+  // Stop the game after 2 minutes (optional)
+  setTimeout(() => {
+    clearInterval(refreshInterval);
+    roomStates.delete(room); // Clear room state after game ends
+  }, 2 * 60 * 1000);
+}
 
 // Serve static files from the "public" directory
 app.use(express.static(path.resolve(__dirname, 'public')));
@@ -37,9 +61,9 @@ app.get('/', (req, res) => {
 ioServer.on('connection', (client) => {
   console.log(`user ${client.id} connected`);
 
+
   client.on("joinRoom", ({ username, room }) => {
     const user = userJoin(client.id, username, room);
-
     client.join(user.room);
 
     // Welcome current user
@@ -58,13 +82,24 @@ ioServer.on('connection', (client) => {
       room: user.room,
       users: getRoomUsers(user.room),
     });
+
+    // Check if the room has an ongoing game
+    if (!roomStates.has(room)) {
+      // Start the game for the first player
+      startGame(room);
+    }
   });
 
   client.on('message', (message) => {
     const user = getCurrentUser(client.id);
-    console.log(randomWord)
+
     if (message === randomWord) {
+      user.points += 100;
       ioServer.to(user.room).emit("message", formatMessage(user.username, ' has guessed the word!'));
+      ioServer.to(user.room).emit("roomUsers", {
+        room: user.room,
+        users: getRoomUsers(user.room),
+      });
     } else {
       ioServer.to(user.room).emit("message", formatMessage(user.username, message));
     }
@@ -86,6 +121,7 @@ ioServer.on('connection', (client) => {
         users: getRoomUsers(user.room),
       });
     }
+    clearInterval(refreshInterval);
   });
 
 });
