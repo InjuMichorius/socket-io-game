@@ -40,7 +40,7 @@ function startGame(room) {
   };
 
   // Refresh the random word every 5 seconds
-  refreshInterval = setInterval(emitRandomWord, 5000);
+  refreshInterval = setInterval(emitRandomWord, 10000);
 
   // Stop the game after 2 minutes (optional)
   setTimeout(() => {
