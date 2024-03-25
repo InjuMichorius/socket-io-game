@@ -122,3 +122,18 @@ function addMessage(message) {
   messages.appendChild(messageElement);
   messages.scrollTop = messages.scrollHeight;
 }
+
+//So stupid Safari doesn't fuck with my input
+document.addEventListener('DOMContentLoaded', function() {
+  const input = document.getElementById('word-scramble-guess-input');
+  if (!input) {
+    return
+  }
+  input.addEventListener('focus', function() {
+      document.body.style.overflow = 'hidden';
+  });
+
+  input.addEventListener('blur', function() {
+      document.body.style.overflow = 'auto';
+  });
+});
