@@ -39,8 +39,14 @@ function startGame(room) {
     ioServer.to(room).emit("randomWord", shuffledWord);
   };
 
-  // Refresh the random word every 10 seconds
-  refreshInterval = setInterval(emitRandomWord, 10000);
+  // Refresh the random word every 5 seconds
+  refreshInterval = setInterval(emitRandomWord, 5000);
+
+  // Stop the game after 2 minutes (optional)
+  setTimeout(() => {
+    clearInterval(refreshInterval);
+    roomStates.delete(room); // Clear room state after game ends
+  }, 2 * 60 * 1000);
 }
 
 // Serve static files from the "public" directory
@@ -101,6 +107,7 @@ ioServer.on('connection', (client) => {
 
   //on disconnect
   client.on("disconnect", () => {
+    console.log(`user ${client.id} connected`);
     const user = userLeave(client.id);
 
     if (user) {

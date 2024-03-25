@@ -28,6 +28,7 @@ ioServer.on("roomUsers", ({ room, users }) => {
 ioServer.on("randomWord", (scrambledRandomWord) => {
   // Display the random word received from the server
   initGeneratedWord(scrambledRandomWord);
+  console.log(scrambledRandomWord);
 });
 
 // Function to display the random word on the client side
