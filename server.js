@@ -39,14 +39,8 @@ function startGame(room) {
     ioServer.to(room).emit("randomWord", shuffledWord);
   };
 
-  // Refresh the random word every 5 seconds
-  refreshInterval = setInterval(emitRandomWord, 5000);
-
-  // Stop the game after 2 minutes (optional)
-  setTimeout(() => {
-    clearInterval(refreshInterval);
-    roomStates.delete(room); // Clear room state after game ends
-  }, 2 * 60 * 1000);
+  // Refresh the random word every 10 seconds
+  refreshInterval = setInterval(emitRandomWord, 10000);
 }
 
 // Serve static files from the "public" directory
@@ -93,7 +87,7 @@ ioServer.on('connection', (client) => {
   client.on('message', (message) => {
     const user = getCurrentUser(client.id);
 
-    if (message === randomWord) {
+    if (message.toLowerCase() === randomWord) {
       user.points += 100;
       ioServer.to(user.room).emit("message", formatMessage(user.username, ' has guessed the word!'));
       ioServer.to(user.room).emit("roomUsers", {
@@ -121,6 +115,7 @@ ioServer.on('connection', (client) => {
         users: getRoomUsers(user.room),
       });
     }
+    //TODO: figure out this questionable code
     clearInterval(refreshInterval);
   });
 

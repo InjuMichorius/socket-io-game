@@ -28,7 +28,6 @@ ioServer.on("roomUsers", ({ room, users }) => {
 ioServer.on("randomWord", (scrambledRandomWord) => {
   // Display the random word received from the server
   initGeneratedWord(scrambledRandomWord);
-  console.log(scrambledRandomWord);
 });
 
 // Function to display the random word on the client side
@@ -55,9 +54,8 @@ function outputRoomName(room) {
 function outputUsers(users) {
   userList.innerHTML = "";
   users.forEach((user) => {
-    console.log(user)
     const li = document.createElement("li");
-    li.innerText = user.username + user.points;
+    li.innerText = user.username + ' ' + user.points;
     userList.appendChild(li);
   });
 }
