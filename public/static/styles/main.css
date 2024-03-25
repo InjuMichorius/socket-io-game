@@ -173,6 +173,8 @@ section form input[type="text"] {
   font-weight: 700;
   font-style: normal;
   width: 100%;
+  -webkit-user-select: none; /* Prevent auto-focus in Safari */
+  user-select: none; /* Standard syntax to prevent selection */
 }
 
 section form input[type="text"]::placeholder {
