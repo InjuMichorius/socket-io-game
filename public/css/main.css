@@ -1,3 +1,7 @@
+.join-header {
+  color: red;
+}
+
 :root {
   --yellow: #f2d21d;
   --yellow-dark: #b1970a;
@@ -34,7 +38,6 @@ section {
 .scoreboard {
   height: 100px;
 }
-
 .scoreboard h2 {
   display: none;
 }
@@ -69,7 +72,8 @@ section {
   margin: 0;
 }
 
-.word-container .letter-wrapper, .word-container .loading-letter {
+.word-container .letter-wrapper,
+.word-container .loading-letter {
   text-transform: uppercase;
   background-color: white;
   width: 90px;
@@ -114,7 +118,6 @@ section {
     font-size: 16px;
   }
 }
-
 section #chat-box {
   height: 110px;
   margin: 0;
@@ -154,7 +157,7 @@ section form {
   display: flex;
 }
 
-section form input[type="text"] {
+section form input[type=text] {
   margin: 0;
   padding: 0 20px;
   border: none;
@@ -177,7 +180,7 @@ section form input[type="text"] {
   user-select: none; /* Standard syntax to prevent selection */
 }
 
-section form input[type="text"]::placeholder {
+section form input[type=text]::placeholder {
   color: var(--yellow);
 }
 
@@ -241,7 +244,6 @@ span.offline {
     transform: scale(0.9);
   }
 }
-
 .word-container .loading-letter:nth-of-type(1) {
   animation-delay: 0s;
 }
