@@ -1,3 +1,41 @@
-.join-header {
-    color: red;
+.home-container {
+  form {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    width: 100%;
+    .form-control {
+      display: flex;
+      gap: 5px;
+      flex-direction: column;
+      padding: 0;
+      border: 0;
+      font-size: 24px;
+      font-family: "Kanit", sans-serif;
+      font-weight: 700;
+      color: var(--yellow-dark);
+      input[type="text"], select {
+        height: 60px;
+        border-radius: 10px;
+        border: 0;
+        padding: 0 20px;
+        font-family: "Kanit", sans-serif;
+        font-weight: 700;
+        color: var(--yellow);
+        &::placeholder {
+          color: var(--yellow);
+        }
+      }
+    }
+    button[type="submit"] {
+        height: 60px;
+        border-radius: 10px;
+        border: 0;
+        padding: 0 20px;
+        font-family: "Kanit", sans-serif;
+        font-weight: 700;
+        color: var(--yellow);
+        background-color: var(--yellow-dark);
+      }
+  }
 }
