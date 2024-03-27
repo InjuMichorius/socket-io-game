@@ -48,7 +48,7 @@ ioServer.on("connection", (client) => {
     };
     //Start game by refreshing the random word every 5 seconds
     if (getRoomUsers(room).length === 0) {
-      refreshInterval = setInterval(emitRandomWord, 3000);
+      refreshInterval = setInterval(emitRandomWord, 8000);
     }
     const user = userJoin(client.id, username, room);
     client.join(user.room);
