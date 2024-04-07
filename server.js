@@ -25,6 +25,7 @@ const ioServer = new Server(http, {
 const port = process.env.PORT || 4242;
 const botName = "Scramble master";
 let randomWord;
+let wordGuessCount;
 
 // Serve static files from the "public" directory
 app.use(express.static(path.resolve(__dirname, "public")));
@@ -44,6 +45,7 @@ ioServer.on("connection", (client) => {
       randomWord = newRandomWord; // Update the value of randomWord
       let shuffledWord = shuffleWord(randomWord);
       console.log(shuffledWord);
+      wordGuessCount = 0;
       ioServer.to(room).emit("randomWord", shuffledWord);
     };
     //Start game by refreshing the random word every 5 seconds
@@ -69,14 +71,29 @@ ioServer.on("connection", (client) => {
       room: user.room,
       users: getRoomUsers(user.room),
     });
-    console.log(`Number of users in room ${user.room}: ${roomUsers.length}`);
+    // console.log(`Number of users in room ${user.room}: ${roomUsers.length}`);
   });
 
   client.on("message", (message) => {
     const user = getCurrentUser(client.id);
 
     if (message.toLowerCase() === randomWord) {
-      user.points += 100;
+      wordGuessCount += 1;
+      if (wordGuessCount === 1) {
+        user.points += 100;
+      } else if (wordGuessCount === 2) {
+        user.points += 90;
+      } else if (wordGuessCount === 3) {
+        user.points += 80;
+      } else if (wordGuessCount === 4) {
+        user.points += 70;
+      } else if (wordGuessCount === 5) {
+        user.points += 60;
+      } else if (wordGuessCount === 6) {
+        user.points += 50;
+      } else if (wordGuessCount === 7) {
+        user.points += 40;
+      }
       ioServer
         .to(user.room)
         .emit(
@@ -111,7 +128,7 @@ ioServer.on("connection", (client) => {
         // Stop refreshing the random word every 5 seconds
         clearInterval(refreshInterval);
       }
-      
+
       // Send users and room info
       ioServer.to(user.room).emit("roomUsers", {
         room: user.room,
@@ -119,7 +136,7 @@ ioServer.on("connection", (client) => {
       });
 
       // Log the number of users in the room after user leaves
-      console.log(`Number of users in room ${user.room}: ${roomUsers.length}`);
+      // console.log(`Number of users in room ${user.room}: ${roomUsers.length}`);
     }
   });
 });
