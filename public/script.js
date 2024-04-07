@@ -10,6 +10,8 @@ const errorState = document.querySelector("span.offline");
 const roomName = document.getElementById("room-name");
 const userList = document.getElementById("users");
 
+const countdownTimer = document.querySelector(".js-countdown-timer")
+
 // Get username and room from URL
 const params = new URLSearchParams(window.location.search);
 const username = params.get("username");
@@ -28,7 +30,6 @@ ioServer.on("roomUsers", ({ room, users }) => {
 ioServer.on("randomWord", (scrambledRandomWord) => {
   // Display the random word received from the server
   initGeneratedWord(scrambledRandomWord);
-  console.log(scrambledRandomWord);
 });
 
 // Function to display the random word on the client side
@@ -44,6 +45,19 @@ function initGeneratedWord(scrambledRandomWord) {
     letterElement.textContent = letter;
     wordContainer.appendChild(letterElement);
   });
+  console.log('Timer that counts from 7 to 0')
+  let count = 6;
+  countdownTimer.innerText = 7;
+  const timer = setInterval(() => {
+    countdownTimer.innerText = count;
+    console.log(count)
+    if (count <= 0) { // Adjusted the condition to include 0
+      clearInterval(timer); // Stop the timer when count reaches 0 or goes below
+    } else {
+      countdownTimer.innerText = count; // Update the countdown display
+      count--;
+    }
+  }, 1000); // Log every second
 }
 
 // Add room name to DOM
@@ -113,27 +127,9 @@ ioServer.on("reconnect_failed", () => {
 });
 
 function addMessage(message) {
-  // messages.appendChild(
-  //   Object.assign(document.createElement("li"), { textContent: message })
-  // );
   const messageElement = document.createElement("li");
   messageElement.classList.add("message-container");
   messageElement.innerHTML = `<p><b>${message.username}: </b>${message.text}<p><span class="time">${message.time}</span>`;
   messages.appendChild(messageElement);
   messages.scrollTop = messages.scrollHeight;
 }
-
-//So stupid Safari doesn't fuck with my input
-document.addEventListener('DOMContentLoaded', function() {
-  const input = document.getElementById('word-scramble-guess-input');
-  if (!input) {
-    return
-  }
-  input.addEventListener('focus', function() {
-      document.body.style.overflow = 'hidden';
-  });
-
-  input.addEventListener('blur', function() {
-      document.body.style.overflow = 'auto';
-  });
-});
