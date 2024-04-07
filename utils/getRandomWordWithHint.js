@@ -1,5 +1,5 @@
 // Load the JSON file containing the words and hints
-const wordsData = require('../assets/wordList.json');
+const wordsData = require('../public/assets/wordList.json');
 
 function getRandomWordWithHint() {
   const randomIndex = Math.floor(Math.random() * wordsData.length);

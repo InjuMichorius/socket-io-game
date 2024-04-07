@@ -50,7 +50,7 @@ function initGeneratedWord(scrambledRandomWord) {
   countdownTimer.innerText = 7;
   const timer = setInterval(() => {
     countdownTimer.innerText = count;
-    console.log(count)
+    playSoundEffect("timer-tick", 0.1)
     if (count <= 0) { // Adjusted the condition to include 0
       clearInterval(timer); // Stop the timer when count reaches 0 or goes below
     } else {
@@ -58,6 +58,7 @@ function initGeneratedWord(scrambledRandomWord) {
       count--;
     }
   }, 1000); // Log every second
+  playSoundEffect("shuffle", 1)
 }
 
 // Add room name to DOM
@@ -78,6 +79,7 @@ function outputUsers(users) {
 // Luister naar het submit event
 document.querySelector("form").addEventListener("submit", (event) => {
   event.preventDefault();
+  playSoundEffect("/message/sentMessage", 1)
 
   // Als er überhaupt iets getypt is
   if (input.value) {
@@ -94,6 +96,7 @@ ioServer.on("message", (message) => {
   loadingState.style.display = "none";
   emptyState.style.display = "none";
   addMessage(message);
+  playSoundEffect("/message/receivedMessage", 1)
 });
 
 // Er gaat iets mis bij het verbinden
@@ -132,4 +135,10 @@ function addMessage(message) {
   messageElement.innerHTML = `<p><b>${message.username}: </b>${message.text}<p><span class="time">${message.time}</span>`;
   messages.appendChild(messageElement);
   messages.scrollTop = messages.scrollHeight;
+}
+
+function playSoundEffect(soundName, volume) {
+  const audio = new Audio(`/assets/audio/${soundName}.mp3`);
+  audio.volume = volume
+  audio.play();
 }
