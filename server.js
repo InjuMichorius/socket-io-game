@@ -26,6 +26,7 @@ const port = process.env.PORT || 4242;
 const botName = "Scramble master";
 let randomWord;
 let wordGuessCount;
+let guessedUsers = [];
 
 // Serve static files from the "public" directory
 app.use(express.static(path.resolve(__dirname, "public")));
@@ -46,9 +47,10 @@ ioServer.on("connection", (client) => {
       let shuffledWord = shuffleWord(randomWord);
       console.log(shuffledWord);
       wordGuessCount = 0;
+      guessedUsers = [];
       ioServer.to(room).emit("randomWord", shuffledWord);
     };
-    //Start game by refreshing the random word every 5 seconds
+    //Start game by refreshing the random word every 8 seconds
     if (getRoomUsers(room).length === 0) {
       refreshInterval = setInterval(emitRandomWord, 8000);
     }
@@ -78,22 +80,20 @@ ioServer.on("connection", (client) => {
     const user = getCurrentUser(client.id);
 
     if (message.toLowerCase() === randomWord) {
-      wordGuessCount += 1;
-      if (wordGuessCount === 1) {
-        user.points += 100;
-      } else if (wordGuessCount === 2) {
-        user.points += 90;
-      } else if (wordGuessCount === 3) {
-        user.points += 80;
-      } else if (wordGuessCount === 4) {
-        user.points += 70;
-      } else if (wordGuessCount === 5) {
-        user.points += 60;
-      } else if (wordGuessCount === 6) {
-        user.points += 50;
-      } else if (wordGuessCount === 7) {
-        user.points += 40;
+      // Check if the user has already guessed the word
+      if (guessedUsers.includes(user.id)) {
+        // If the user has already guessed, ignore the message
+        return;
       }
+      wordGuessCount += 1;
+      if (wordGuessCount === 0) {
+        user.points += 100;
+      } else {
+        // Subsequent guesses
+        const points = 90 - (guessedUsers.length - 1) * 10; // Decrease points by 10 for each subsequent guess
+        user.points += points < 0 ? 0 : points; // Ensure points don't go below 0
+      }
+      guessedUsers.push(user.id); // Add the user to the list of guessed users
       ioServer
         .to(user.room)
         .emit(

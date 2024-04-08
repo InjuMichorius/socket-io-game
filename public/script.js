@@ -10,7 +10,7 @@ const errorState = document.querySelector("span.offline");
 const roomName = document.getElementById("room-name");
 const userList = document.getElementById("users");
 
-const countdownTimer = document.querySelector(".js-countdown-timer")
+const countdownTimer = document.querySelector(".js-countdown-timer");
 
 // Get username and room from URL
 const params = new URLSearchParams(window.location.search);
@@ -45,20 +45,20 @@ function initGeneratedWord(scrambledRandomWord) {
     letterElement.textContent = letter;
     wordContainer.appendChild(letterElement);
   });
-  console.log('Timer that counts from 7 to 0')
   let count = 6;
   countdownTimer.innerText = 7;
   const timer = setInterval(() => {
     countdownTimer.innerText = count;
-    playSoundEffect("timer-tick", 0.1)
-    if (count <= 0) { // Adjusted the condition to include 0
+    playSoundEffect("timer-tick", 0.1);
+    if (count <= 0) {
+      // Adjusted the condition to include 0
       clearInterval(timer); // Stop the timer when count reaches 0 or goes below
     } else {
       countdownTimer.innerText = count; // Update the countdown display
       count--;
     }
   }, 1000); // Log every second
-  playSoundEffect("shuffle", 1)
+  playSoundEffect("shuffle", 1);
 }
 
 // Add room name to DOM
@@ -71,7 +71,7 @@ function outputUsers(users) {
   userList.innerHTML = "";
   users.forEach((user) => {
     const li = document.createElement("li");
-    li.innerText = user.username + ' ' + user.points;
+    li.innerText = user.username + " " + user.points;
     userList.appendChild(li);
   });
 }
@@ -79,7 +79,7 @@ function outputUsers(users) {
 // Luister naar het submit event
 document.querySelector("form").addEventListener("submit", (event) => {
   event.preventDefault();
-  playSoundEffect("/message/sentMessage", 1)
+  playSoundEffect("/message/sentMessage", 1);
 
   // Als er überhaupt iets getypt is
   if (input.value) {
@@ -96,7 +96,7 @@ ioServer.on("message", (message) => {
   loadingState.style.display = "none";
   emptyState.style.display = "none";
   addMessage(message);
-  playSoundEffect("/message/receivedMessage", 1)
+  playSoundEffect("/message/receivedMessage", 1);
 });
 
 // Er gaat iets mis bij het verbinden
@@ -139,6 +139,6 @@ function addMessage(message) {
 
 function playSoundEffect(soundName, volume) {
   const audio = new Audio(`/assets/audio/${soundName}.mp3`);
-  audio.volume = volume
+  audio.volume = volume;
   audio.play();
 }
